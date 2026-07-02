@@ -15,7 +15,6 @@ android {
         versionName "1.0"
 
         ndk {
-            // Target all necessary system architectures
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
 
@@ -44,12 +43,11 @@ android {
     }
 }
 
-// Top-level configuration extension for Chaquopy 16.1.0
 chaquopy {
     defaultConfig {
         version "3.10"
         pip {
-            // Add any pip dependencies here if needed later (e.g., install "numpy")
+            // Add external modules here if needed
         }
     }
 }
