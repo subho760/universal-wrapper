@@ -18,14 +18,6 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
 
-                // Changed to 3.10 to ensure seamless compatibility with Chaquopy 16.1.0
-        python {
-            version "3.10"
-            pip {
-                // Add any external python libraries here if your app needs them later
-            }
-        }
-
         externalNativeBuild {
             cmake {
                 path "CMakeLists.txt"
@@ -47,6 +39,16 @@ android {
             minifyEnabled false
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+// FIXED: Moved chaquopy block to its proper top-level configuration extension location
+chaquopy {
+    defaultConfig {
+        version "3.10"
+        pip {
+            // Add external modules here if needed
         }
     }
 }
