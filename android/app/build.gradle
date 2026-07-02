@@ -1,1 +1,58 @@
 
+plugins {
+    id 'com.android.application'
+    id 'com.chaquo.python'
+}
+
+android {
+    namespace 'com.night.easyunitconverter'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.night.easyunitconverter"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+
+        python {
+            version "16.1.0"
+            pip {
+                // Add external python dependencies here if required (e.g., install "numpy")
+            }
+        }
+
+        externalNativeBuild {
+            cmake {
+                path "CMakeLists.txt"
+            }
+        }
+    }
+
+    signingConfigs {
+        release {
+            storeFile file("release.jks")
+            storePassword System.getenv("MY_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("MY_KEY_ALIAS")
+            keyPassword System.getenv("MY_KEY_PASSWORD")
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'com.capacitorjs:android:6.0.0'
+}
