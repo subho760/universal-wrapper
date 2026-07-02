@@ -3,7 +3,7 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
-        // FIXED: Added the dedicated Chaquopy repository mirror so Gradle can find the plugin artifact
+        // Modern approach: Plugin repository mapping goes here
         maven { url "https://chaquo.com/maven" }
     }
 }
@@ -12,6 +12,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Modern approach: Library dependency repository mapping goes here
         maven { url "https://chaquo.com/maven" }
     }
 }
