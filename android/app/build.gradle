@@ -18,9 +18,9 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
 
-        // FIXED: Replaced '16.1.0' with a highly stable target Python engine version
+                // Changed to 3.10 to ensure seamless compatibility with Chaquopy 16.1.0
         python {
-            version "3.11"
+            version "3.10"
             pip {
                 // Add any external python libraries here if your app needs them later
             }
