@@ -18,10 +18,11 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
 
+        // FIXED: Replaced '16.1.0' with a highly stable target Python engine version
         python {
-            version "16.1.0"
+            version "3.11"
             pip {
-                // Add external python dependencies here if required (e.g., install "numpy")
+                // Add any external python libraries here if your app needs them later
             }
         }
 
