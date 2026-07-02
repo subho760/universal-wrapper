@@ -3,6 +3,8 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        // FIXED: Added the dedicated Chaquopy repository mirror so Gradle can find the plugin artifact
+        maven { url "https://chaquo.com/maven" }
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +12,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://chaquo.com/maven" }
     }
 }
 
