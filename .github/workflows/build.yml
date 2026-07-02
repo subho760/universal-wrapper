@@ -20,7 +20,7 @@ jobs:
     - name: Set up Gradle Build Environment
       uses: gradle/actions/setup-gradle@v6
       with:
-        gradle-version: '8.4'
+        gradle-version: '8.7' # FIXED: Bumped from 8.4 to 8.7 to fix version compatibility
 
     - name: Set up Android NDK
       uses: android-actions/setup-android@v3
@@ -31,7 +31,6 @@ jobs:
       run: |
         echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release.jks
 
-    # FIX: Pointing explicitly to the application submodule (:app:) compilation target
     - name: Build Production Bundle
       run: gradle :app:assembleRelease
       working-directory: android
