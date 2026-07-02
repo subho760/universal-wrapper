@@ -1,7 +1,7 @@
 name: Build Android Release APK
 
 on:
-  workflow_dispatch: # Kept as manual execution only
+  workflow_dispatch:
 
 jobs:
   build:
@@ -17,11 +17,10 @@ jobs:
         java-version: '17'
         distribution: 'zulu'
 
-    # 1. Added explicit global Gradle distribution environment configuration
     - name: Set up Gradle Build Environment
       uses: gradle/actions/setup-gradle@v6
       with:
-        gradle-version: '8.4' # Clean production Gradle version matching typical target SDK 34 builds
+        gradle-version: '8.4'
 
     - name: Set up Android NDK
       uses: android-actions/setup-android@v3
@@ -32,11 +31,9 @@ jobs:
       run: |
         echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release.jks
 
-    # REMOVED: "Grant Execute Permission for Gradle" step which was failing
-
-    # 2. Changed execution from local file wrapper (./gradlew) to global build instance (gradle)
+    # FIX: Pointing explicitly to the application submodule (:app:) compilation target
     - name: Build Production Bundle
-      run: gradle assembleRelease
+      run: gradle :app:assembleRelease
       working-directory: android
       env:
         MY_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
