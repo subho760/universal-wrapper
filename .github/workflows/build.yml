@@ -1,8 +1,7 @@
 name: Build Android Release APK
 
 on:
-  push:
-    branches: [ "main" ]
+  workflow_dispatch: # Enables manual execution trigger from the Actions tab
 
 jobs:
   build:
@@ -18,6 +17,7 @@ jobs:
         java-version: '17'
         distribution: 'zulu'
 
+    # Ensured explicit setup tool to locate the NDK installation cleanly
     - name: Set up Android NDK
       uses: android-actions/setup-android@v3
       with:
@@ -28,10 +28,10 @@ jobs:
         echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/release.jks
 
     - name: Grant Execute Permission for Gradle
-      run: chmod +x android/gradlew
+      run: chmod +x gradlew
       working-directory: android
 
-    - name: Build with Gradle
+    - name: Build Production Bundle
       run: ./gradlew assembleRelease
       working-directory: android
       env:
@@ -44,4 +44,3 @@ jobs:
       with:
         name: release-apk
         path: android/app/build/outputs/apk/release/app-release.apk
-        
